@@ -1,3 +1,169 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary">
+  <span class="example-fill-remaining-space"></span>
+  <span>Application Title</span>
+  <span class="example-fill-remaining-space"></span>
+</md-toolbar>
+<button md-raised-button (click)="getUsers()">Get Fave</button>
+
+<md-select class="select-box" placeholder="Groups" [(ngModel)]="selectedValue" (change)="selectGroup(selectedValue)">
+   <md-option *ngFor="let group of groups" [value]="group.id"  >{{ group.name }}</md-option>
+</md-select>
+
+<md-select class="select-box" placeholder="Profiles" [(ngModel)]="selectedProfile" (change)="selectProfile(selectedProfile)">
+   <md-option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.first_name+" "+profile.last_name }}</md-option>
+</md-select>
+
+<masonry [useImagesLoaded]="true">
+  <masonry-brick class="example-card"  *ngFor="let item of newArr"> 
+    <md-card >
+      <img *ngIf="item.attachments" md-card-image src="{{getPhoto(item)}}">
+      <md-icon *ngIf="item.attachments && item.attachments[0].type == 'video'" class="icon-play">play_circle_outline</md-icon>
+      <md-card-content>
+        <p *ngIf="item.text" class="text">{{getText(item)}}</p>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button (click)="onNavigate(item)">OPEN IN VK</button>
+        <button md-button>SHARE</button>
+      </md-card-actions>
+    </md-card>
+  </masonry-brick>
+</masonry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="my-flex-container">
+<md-card class="example-card" *ngFor="let item of arrProf" >
+  <img md-card-image src="{{getPhoto(item)}}">
+  
+  <md-card-content>
+    <p>{{getText(item)}}</p>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button (click)="onNavigate(item)">OPEN IN VK</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<md-toolbar color="primary" >
+  <span class="example-fill-remaining-space"></span>
+  <span >Киномания</span>
+  <span class="example-fill-remaining-space"></span>
+
+</md-toolbar >
+
+<!--<md-card *ngFor="let item of arr">
+  <img *ngFor="let i of item" src="{{i.attachments[0].type}}">
+</md-card>
+
+<md-card class="example-card">
+  <img md-card-image src="https://pp.userapi.com/c543108/v543108416/242ba/WuTtsvavDtM.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+<md-card class="example-card">
+  <img md-card-image src="https://pp.userapi.com/c543108/v543108416/29c80/vRh5VAe0JbE.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+<md-card class="example-card">
+  <img md-card-image src="https://pp.userapi.com/c543108/v543108416/29d28/yIwRMpFQ4OI.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+<md-card class="example-card">
+  <img md-card-image src="https://pp.userapi.com/c836427/v836427382/43d3f/BcXKE3rLDQg.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+<md-card class="example-card" style="margin-top: -78px">
+  <img md-card-image src="https://pp.userapi.com/c543108/v543108416/29d53/Tz2zaKV-WMA.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+<md-card class="example-card" style="margin-top: -248px;"> 
+  <img md-card-image src="https://pp.userapi.com/c543108/v543108416/2227c/O-9TbiagM6s.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+
+
+<md-toolbar color="primary" >
+  <span class="example-fill-remaining-space"></span>
+  <span >Наука и Техника</span>
+  <span class="example-fill-remaining-space"></span>
+
+</md-toolbar >
+
+<md-card *ngFor="let item of arr">
+  <img *ngFor="let i of item" src="{{i.attachments[0].type}}">
+</md-card>
+
+<md-card class="example-card">
+  <img md-card-image src="https://cs541602.userapi.com/c639129/v639129395/27e04/rKr77vVYgOM.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+<md-card class="example-card">
+  <img md-card-image src="https://cs541602.userapi.com/c639129/v639129395/281bb/hOlMHJZ4njg.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+<md-card class="example-card">
+  <img md-card-image src="https://cs541602.userapi.com/c639129/v639129395/28245/bIkjPvuozHE.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+<md-card class="example-card">
+  <img md-card-image src="https://cs541602.userapi.com/c639129/v639129395/29c2e/blgkknJCEpg.jpg">
+  <md-card-actions>
+    <button md-button>UNLIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+-->

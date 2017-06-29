@@ -1,0 +1,36 @@
+.example-fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+md-toolbar {
+    margin-bottom: 10px;
+}
+
+
+.example-card {
+ width:  317px;
+ margin: 10px; 
+}
+
+
+.select-box {
+  width: 300px;
+}
+
+
+.icon-play {
+  position: absolute;
+  top: 39px;
+  left: 117px;
+  font-size: 100px;
+  color: #fff;
+}
+
+.text {
+
+}
+
+.grid {
+ -webkit-column-width: 18em;
+ -webkit-column-gap: 1em; 
+}
