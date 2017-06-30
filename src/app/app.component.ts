@@ -21,17 +21,19 @@ export class AppComponent {
   arrProf: any = [];
   constructor (private connectService: ConnectService) {}
   
-  ngOnInit() { this.getHeroes(); }
+  ngOnInit() {  }
+  
   getHeroes() {
     this.connectService.getHeroes().then(heroes => this.faves = heroes);
     
   }
   getUsers(): void {
-    this.items = this.faves.items;
-    this.groups = this.faves.groups;
-    this.profiles = this.faves.profiles;
+    //this.items = this.faves.items;
+    ////this.groups = this.faves.groups;
+    //this.profiles = this.faves.profiles;
     console.log(this.faves) 
-    this.sortPosts();
+   // this.sortPosts();
+   this.getHeroes();
   }
 
   

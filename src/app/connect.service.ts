@@ -8,23 +8,25 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ConnectService {
-
-  private heroesUrl = 'https://api.vk.com/method/fave.getPosts?count=1000&extended=1&v=5.52&access_token=f26077595b856fab5bac130fc739c143990197b972773a9a7e06e7c8bad6906c971c2d91c36353189d53e&callback=JSONP_CALLBACK';  // URL to web API
+  private code = `var offset = 100;var arr = API.wall.get({owner_id:-41852250,count:100,offset:0}).items; while(offset < 2500) {arr = arr %2B API.wall.get({owner_id:-41852250,count:100,offset:offset}).items;offset = offset %2B 100;}return arr;`;
+  private heroesUrl = `https://api.vk.com/method/execute?code=${this.code}&v=5.52&access_token=e805910c69817e2a58fce24e9fa00bf2207f03aea2496cac2f694cef122e54cf7033226a5ff0f483a19da&callback=JSONP_CALLBACK`;  // URL to web API
   constructor (private http: Jsonp) {}
   getHeroes(): Promise<any> {
     return this.http.get(this.heroesUrl)
              .toPromise()
-             .then(response => response.json().response as User);
+             .then(response => response.json().response as any)
+            
   }
 
 }
 
-/*var arr = [];	
-var a = API.wall.get({"owner_id":-41852250,"count":100,"offset":0});    
-var b = API.wall.get({"owner_id":-41852250,"count":100,"offset":100}); 
-arr.push(a.items);
-arr.push(b.items); 
-return {"length":arr[0].length};
+/* var offset = 0;	
+'var arr = API.wall.get({"owner_id":"-41852250","count":"2","offset":"offset"});'
+while (offset < 1000) {
+  arr = ',' arr + API.wall.get({owner_id:-41852250,count:2,offset:offset});
+  offset = offset + 100;
+}
+return arr;
 
 var i = 0;
 var members = [];
