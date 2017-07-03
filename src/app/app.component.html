@@ -3,6 +3,10 @@
   <span>Application Title</span>
   <span class="example-fill-remaining-space"></span>
 </md-toolbar>
+
+<md-progress-bar *ngIf="isValid; else content" mode="indeterminate"></md-progress-bar>
+
+<ng-template #content>
 <button md-raised-button (click)="getUsers()">Get Fave</button>
 
 <md-select class="select-box" placeholder="Groups" [(ngModel)]="selectedValue" (change)="selectGroup(selectedValue)">
@@ -28,7 +32,7 @@
     </md-card>
   </masonry-brick>
 </masonry>
-
+</ng-template>
 
 
 

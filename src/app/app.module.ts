@@ -5,7 +5,7 @@ import { HttpModule, JsonpModule, Jsonp } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ConnectService } from './connect.service';
-import {MdCardModule, MdGridListModule, MdToolbarModule, MdIconModule, MdButtonModule, MdAutocompleteModule, MdSelectModule, MdProgressSpinnerModule} from '@angular/material';
+import {MdCardModule, MdGridListModule, MdProgressBarModule, MdToolbarModule, MdIconModule, MdButtonModule, MdAutocompleteModule, MdSelectModule, MdProgressSpinnerModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MasonryModule } from 'angular2-masonry';
 
@@ -20,7 +20,7 @@ import { MasonryModule } from 'angular2-masonry';
     FormsModule,
     HttpModule,
     JsonpModule, BrowserAnimationsModule,
-    MdCardModule, MdGridListModule, MdToolbarModule, MdIconModule, MdAutocompleteModule, MdButtonModule, MdSelectModule, MdButtonModule, MdProgressSpinnerModule
+    MdCardModule, MdGridListModule, MdToolbarModule, MdProgressBarModule, MdIconModule, MdAutocompleteModule, MdButtonModule, MdSelectModule, MdButtonModule, MdProgressSpinnerModule
   ],
   providers: [ConnectService ],
   bootstrap: [AppComponent]

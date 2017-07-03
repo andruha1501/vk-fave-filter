@@ -11,7 +11,7 @@ import { Group } from './group';
 })
 export class AppComponent {
   errorMessage: string;
-  faves: User;
+  faves: any = [];
   items: Item[];
   groups: Group[];
   profiles: any;
@@ -19,24 +19,39 @@ export class AppComponent {
   selectedValue: string;
   newArr: any[]=[];
   arrProf: any = [];
-  constructor (private connectService: ConnectService) {}
+  check: any;
+  isValid:boolean = true;
+  countPost:number;
+  constructor (private connectService: ConnectService) { this.getData() }
   
-  ngOnInit() {  }
+  ngOnInit() {  this.getCountPosts(); }
+
+  getCountPosts() {
+    return this.connectService.getCountPosts().subscribe(count => this.countPost = count);
+  }
   
-  getHeroes() {
-    this.connectService.getHeroes().then(heroes => this.faves = heroes);
-    
+  getData() {
+    let offsetStart: number=0;
+    let offsetFinish: number=2500;
+ // this.connectService.getData(0,2500).subscribe(data => this.faves = this.faves.concat(data));
+    let timer = setInterval(() => {
+      if (offsetStart < this.countPost) {
+        this.connectService.getData(offsetStart,offsetFinish).subscribe(data => this.faves = this.faves.concat(data)); 
+        offsetStart+=2500; offsetFinish+=2500
+      }
+      else {
+        clearInterval(timer); 
+        this.isValid = false;}},5000 ); 
   }
   getUsers(): void {
     //this.items = this.faves.items;
     ////this.groups = this.faves.groups;
     //this.profiles = this.faves.profiles;
-    console.log(this.faves) 
+  console.log(this.faves);
    // this.sortPosts();
-   this.getHeroes();
+  this.getPostIsLike();
   }
 
-  
   sortPosts(): void {
     for (let i = 0; i < this.groups.length; i++) {
       this.arr[i]=[];
@@ -97,7 +112,17 @@ export class AppComponent {
   onNavigate(item){
     window.open(`https://vk.com/fave?w=wall${item.owner_id}_${item.id}`, "_blank");
 }
+  getPostIsLike(): void {
+    for (let i = 0; i < this.faves.length; i++) {
+      if(this.faves[i].likes.user_likes == 1) {
+        this.arr.push(this.faves[i]);
+      }
+    }
+    console.log(this.arr);
+  }
  
 }
+
+
 
 
